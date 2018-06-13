@@ -5,7 +5,7 @@ const uuid = require("uuid/v4");
 
 const app = express();
 
-const dogsDb = [
+let dogsDb = [
   {
     id: "baa22af1-6054-41e6-b1f4-135fa67820d0",
     name: "Sherman",
@@ -73,6 +73,16 @@ app.get("/dogs/:id", (req, res) => {
     res.render("dogs/show", { dog: dog });
   } else {
     res.render("404").status(404);
+  }
+});
+
+app.post("/dogs/:id/delete", (req, res) => {
+  const foundDog = findDog(req.params.id);
+  if (foundDog) {
+    dogsDb = dogsDb.filter(dog => dog.id !== foundDog.id);
+    res.redirect("/dogs");
+  } else {
+    res.status(404).render("404");
   }
 });
 
