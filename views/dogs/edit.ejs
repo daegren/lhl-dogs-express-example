@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Doggos!</title>
+  </head>
+  <body>
+    <h1>Edit a Dog</h1>
+
+
+    <form action="/dogs/<%= dog.id %>" method="POST">
+      <div>
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" value="<%= dog.name %>" />
+      </div>
+      <div>
+        <label for="hairColor">Hair Color:</label>
+        <input type="text" id="hairColor" name="hairColor" value="<%= dog.hairColor %>" />
+      </div>
+
+      <input type="submit" value="Update Dog" />
+    </form>
+  </body>
+</html>
