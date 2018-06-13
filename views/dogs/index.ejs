@@ -17,7 +17,11 @@
       <tbody>
         <% dogs.forEach(dog => { %>
           <tr>
-            <td><%= dog.name %></td>
+            <td>
+              <a href="/dogs/<%= dog.id %>">
+                <%= dog.name %>
+              </a>
+            </td>
             <td><%= dog.hairColor %></td>
           </tr>
         <% }) %>

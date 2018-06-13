@@ -23,6 +23,16 @@ app.get("/dogs", (req, res) => {
   res.render("dogs/index", { dogs: dogsDb });
 });
 
+app.get("/dogs/:id", (req, res) => {
+  const id = req.params.id;
+  const dog = dogsDb.filter(dog => dog.id === id)[0];
+  if (dog) {
+    res.render("dogs/show", { dog: dog });
+  } else {
+    res.render("404").status(404);
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`App is running @ http://localhost:${PORT}`);
 });
