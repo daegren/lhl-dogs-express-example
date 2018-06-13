@@ -1,5 +1,7 @@
 const PORT = process.env.PORT || 8080;
 const express = require("express");
+const bodyParser = require("body-parser");
+const uuid = require("uuid/v4");
 
 const app = express();
 
@@ -17,6 +19,23 @@ const dogsDb = [
 ];
 
 app.set("view engine", "ejs");
+app.use(bodyParser.urlencoded({ extended: false }));
+
+app.get("/dogs/new", (req, res) => {
+  res.render("dogs/new");
+});
+
+app.post("/dogs", (req, res) => {
+  const newDog = {
+    id: uuid(),
+    name: req.body.name,
+    hairColor: req.body.hairColor
+  };
+
+  dogsDb.push(newDog);
+
+  res.redirect(`/dogs/${newDog.id}`);
+});
 
 // app.get('/dogs', function(req, res) {});
 app.get("/dogs", (req, res) => {
