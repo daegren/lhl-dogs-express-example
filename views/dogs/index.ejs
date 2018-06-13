@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Doggos!</title>
+  </head>
+  <body>
+    <h1>Dogs!</h1>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Hair Color</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% dogs.forEach(dog => { %>
+          <tr>
+            <td><%= dog.name %></td>
+            <td><%= dog.hairColor %></td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </body>
+</html>
