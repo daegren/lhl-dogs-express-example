@@ -26,6 +26,10 @@ const findDog = id => {
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: false }));
 
+const render404 = res => {
+  res.status(404).render("404");
+};
+
 app.get("/dogs/new", (req, res) => {
   res.render("dogs/new");
 });
@@ -47,7 +51,7 @@ app.get("/dogs/:id/edit", (req, res) => {
   if (dog) {
     res.render("dogs/edit", { dog: dog });
   } else {
-    res.status(404).render("404");
+    render404(res);
   }
 });
 
@@ -58,7 +62,7 @@ app.post("/dogs/:id", (req, res) => {
     dog.hairColor = req.body.hairColor;
     res.redirect("/dogs");
   } else {
-    res.status(404).render("404");
+    render404(res);
   }
 });
 
@@ -72,7 +76,7 @@ app.get("/dogs/:id", (req, res) => {
   if (dog) {
     res.render("dogs/show", { dog: dog });
   } else {
-    res.render("404").status(404);
+    render404(res);
   }
 });
 
@@ -82,7 +86,7 @@ app.post("/dogs/:id/delete", (req, res) => {
     dogsDb = dogsDb.filter(dog => dog.id !== foundDog.id);
     res.redirect("/dogs");
   } else {
-    res.status(404).render("404");
+    render404(res);
   }
 });
 
